@@ -1,0 +1,79 @@
+<script type="text/javascript"> 
+var workers = []; 
+
+function createNewWorker(worker){ 
+workers.push(worker); 
+return worker; 
+} 
+
+function FindWorker(SName, Id){ 
+var MWorker; 
+for(var i=0;i < workers.length; i++){ 
+if(workers[i].SName===SName){ 
+if(workers[i].Id===Id){ 
+MWorker = workers[i]; 
+}else{ 
+console.log('Net takogo sotrudnika'); 
+} 
+} 
+} 
+return MWorker; 
+} 
+
+function addSalary (worker, amount){ 
+if(typeof amount === 'number'){ 
+worker.salary += amount; 
+} else { 
+console.log('Zarplata ne nachislena'); 
+} 
+} 
+
+function removeSalary (worker, amount){ 
+if(typeof amount === 'number'){ 
+worker.salary -= amount; 
+}else{ 
+console.log('Zarplata ne uderjana'); 
+} 
+} 
+
+function getSalary(amount){ 
+return worker.salary; 
+} 
+
+function createSalaryGetter (worker){ 
+return function(){ 
+return worker.salary / 340; 
+} 
+} 
+
+var aseleknurk = createNewWorker({ 
+SName : "aseleknurk", 
+Id : '1', 
+salary : 0 
+}); 
+
+var ramazan = createNewWorker({ 
+SName : "ramazan", 
+Id : '2', 
+salary : 0 
+}); 
+
+addSalary(aseleknurk, 350000); 
+removeSalary(aseleknurk,10000); 
+
+addSalary(ramazan, 350000); 
+removeSalary(ramazan,'MyString'); 
+
+
+var aseleknurk2 = FindWorker('aseleknurk','1'); 
+var getWorker1Salary = createSalaryGetter(aseleknurk2); 
+
+var ramazan2 = FindWorker('ramazan','2'); 
+var getWorker2Salary = createSalaryGetter(ramazan2); 
+
+console.log("\nZP Aseleknurk"); 
+console.log(getWorker1Salary()); 
+
+console.log("\nZP Ramazan"); 
+console.log(getWorker2Salary()); 
+</script>
